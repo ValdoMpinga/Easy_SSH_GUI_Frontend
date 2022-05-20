@@ -1,0 +1,45 @@
+.hostFormContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 700px;
+  height: 500px;
+  padding-top: 30px;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px #4caf50;
+  display: grid;
+  justify-content: center;
+  grid-template-rows: 10% 90%;
+  /* align-items: center;*/
+}
+
+form {
+  width: 300px;
+}
+
+
+.btn {
+  width: 200px;
+  height: 50px;
+  background-color: #92b4ec;
+}
+
+.buttonContainer
+{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.formTitle {
+  margin-bottom: 50px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.formSubContainer {
+  margin-top: 30px;
+}
