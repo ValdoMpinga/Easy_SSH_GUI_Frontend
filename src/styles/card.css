@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  background-color: #92b4ec;
+  border-radius: 10px;
+  width: 600px;
+  height: 100px;
+  display: grid;
+  grid-template-columns: 10% 70% 10% 10%;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.cardDecoration {
+  height: 100px;
+  width: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color: #ffffff;
+}
+
+.cardTitle {
+  background-color: #92b4ec;
+  margin-left: 50px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  height: fit-content;
+}
+
+.editIcon,
+.deleteIcon {
+  background-color: #92b4ec;
+}

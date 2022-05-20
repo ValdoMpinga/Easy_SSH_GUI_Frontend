@@ -1,24 +1,40 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Card from './components/Card';
+import Header from './components/Header';
+import AddIcon from '@mui/icons-material/Add';
+import Fab from '@mui/material/Fab';
+import Popup from 'reactjs-popup';
 
-function App() {
+
+function App()
+{
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <Header />
+      <Card
+      />
+      <Popup trigger={<div className='addButton'>
+        <Fab
+          onClick={() =>
+          {
+
+          }}
+          size="large"
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <AddIcon
+            fontSize="large"
+            color="black"
+          />
+        </Fab>
+      </div>} position="right center">
+       
+      </Popup>
+   
+
+    </>
   );
 }
 
