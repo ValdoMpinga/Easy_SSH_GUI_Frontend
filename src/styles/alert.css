@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 250px;
+  height: 300px;
+  background-color: red;
+  position: relative;
+}
+
+.cardHeader {
+  height: 100px;
+  background-color: blue;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerTitle {
+  font-size: 20px;
+  text-align: center;
+}
+
+.cardMessage {
+  display: flex;
+  justify-content: center; /* optional */
+  margin-top: 40px;
+}
+
+.alertButtonContainer {
+  position: absolute;
+  bottom: 0;
+  margin-left: 70px;
+  margin-bottom: 10px;
+}

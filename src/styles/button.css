@@ -1,0 +1,17 @@
+*
+{
+    margin:0;
+    padding:0;
+}
+
+.customButton
+{
+    border-radius: 10px;
+    border: 0px;
+    opacity: 1;
+    transition: opacity 300ms ease;
+}
+
+.touched {
+  opacity: 0.5;
+}
