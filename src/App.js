@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Alert } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Hosts from './components/Hosts';
 import Header from './components/Header';
@@ -7,30 +7,13 @@ import Fab from '@mui/material/Fab';
 import Popup from 'reactjs-popup';
 import HostForm from './components/HostForm';
 import axios from 'axios';
+import Alert from './components/Alert'
 
-
-function App()
+function App() 
 {
 
   const [hosts, setHosts] = useState([])
 
-  async function DeleteRequest(requestOptions)
-  {
-    try
-    {
-      await fetch(
-        'http://localhost:3001/connections/delete', requestOptions)
-        .then(response => response.text())
-        .then(data =>{
-          console.log("aaaaaaaa")
-          console.log(data)
-        
-        })
-    } catch (e)
-    {
-      console.log(e);
-    }
-  }
 
   useEffect(() =>
   {
@@ -43,8 +26,58 @@ function App()
       {
         console.log(err);
       })
-  }, [])
+  }, [hosts])
 
+
+  async function DeleteRequest(requestOptions)
+  {
+    try
+    {
+      await fetch(
+        'http://localhost:3001/connections/delete', requestOptions)
+        .then(response => response.text())
+        .then(data =>
+        {
+          return data
+        })
+    } catch (e)
+    {
+      console.log(e);
+    }
+  }
+
+
+  const handleFormSubmit = async (e, hostData) =>
+  {
+    try
+    {
+      const requestOptions =
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify
+          ({
+            "IP": hostData.ip,
+            "username": hostData.hostName,
+            "connectionName": hostData.hostNickname,
+          })
+      }
+
+      await fetch(
+        'http://localhost:3001/connections/insert', requestOptions)
+        .then(response => response.text())
+        .then(data =>
+        {
+          return data
+        })
+    }
+    catch (e)
+    {
+      console.log(e);
+    }
+
+
+  }
 
   const deleteHost = async (id) =>
   {
@@ -57,15 +90,36 @@ function App()
 
     let response = await DeleteRequest(requestOptions)
 
-    if (response === "Host deleted")
+    console.log("before :" + response);
+    if (response == "Host deleted")
     {
+      console.log("dzome");
+      <Popup trigger={response != null}
+        position="center center">
+        <Alert
+          cardBackgroundColor="white"
+          headerBackgroundColor="#4CAF50"
+          buttonBackgroundColor="#4CAF50"
+          headerTitleColor="white"
+          title="Success!"
+          message="Host added succesfully"
+          width="500px"
+          height="300px"
+        />
+
+      </Popup>
+      alert("Host deleted successfully");
       setHosts(hosts.filter((host) =>
         host._id !== id
       ))
     } else
     {
+      alert("Error deleting host")
       console.log(response);
+
     }
+
+
   }
 
   const editHost = (id) =>
@@ -91,7 +145,6 @@ function App()
         <Fab
           onClick={() =>
           {
-
           }}
           size="large"
         >
@@ -100,8 +153,10 @@ function App()
             color="black"
           />
         </Fab>
-      </div>} position="right center">
-        <HostForm />
+      </div>}
+        position="right center">
+        <HostForm
+          submit={handleFormSubmit} />
       </Popup>
 
 
