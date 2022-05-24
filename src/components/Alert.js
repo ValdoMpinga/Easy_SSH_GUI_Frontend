@@ -3,7 +3,7 @@ import '../styles/alert.css'
 import Button from './Button'
 function Alert(props)
 {
-    return (
+    return (props.trigger) ? (
         <div className='container'
             style=
             {{
@@ -34,7 +34,7 @@ function Alert(props)
             />
             </div>
         </div>
-    )
+    ) : ""
 }
 
 export default Alert

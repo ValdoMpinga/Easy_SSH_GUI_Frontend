@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import '../styles/hostForm.css'
+import { SentimentDissatisfied } from '@mui/icons-material'
 
 function HostForm({ submit })
 {
     const [ip, setIp] = useState('')
-    const [hostName, setHostname] = useState('')
-    const [hostNickname, setHostNickname] = useState('')
+    const [login, setLogin] = useState('')
+    const [password, setPassword] = useState('')
+    const [connectionName, setConnectionName] = useState('')
 
     return (
         <div className='hostFormContainer'
@@ -17,17 +19,19 @@ function HostForm({ submit })
             <div className='formSubContainer'>
                 <form onSubmit={(e) =>
                 {
-                   let hostInput =
+                    let hostData =
                     {
-                        hostName: hostName,
                         ip: ip,
-                       hostNickname: hostNickname,
+                        login: login,
+                        password: password,
+                        connectionName: connectionName,
                     }
 
-                    submit(e, hostInput)
-                }}>
+                    submit(e, hostData)
+                }}
 
-                    
+                >
+
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">IP</label>
                         <input
@@ -41,7 +45,7 @@ function HostForm({ submit })
                             onChange={(e) => setIp(e.target.value)}
                         />
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="hostName" class="form-label">Login</label>
                         <input
@@ -49,8 +53,20 @@ function HostForm({ submit })
                             required="true"
                             placeholder='Login'
                             class="form-control"
-                            value={hostNickname}
-                            onChange={(e) => setHostNickname(e.target.value)}
+                            value={login}
+                            onChange={(e) => setLogin(e.target.value)}
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="hostName" class="form-label">Password</label>
+                        <input
+                            type="password"
+                            required="true"
+                            placeholder='password'
+                            class="form-control"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
 
@@ -59,15 +75,12 @@ function HostForm({ submit })
                         <input type="text"
                             required="true"
                             placeholder="Your custom host name" class="form-control input-sm" aria-describedby="emailHelp"
-                            value={hostName}
-                            onChange={(e) => setHostname(e.target.value)}
+                            value={connectionName}
+                            onChange={(e) => setConnectionName(e.target.value)}
                         />
-
                     </div>
 
 
-
-               
 
                     <div className='buttonContainer'>
                         <button type="submit" class="btn btn-primary">Submit</button>

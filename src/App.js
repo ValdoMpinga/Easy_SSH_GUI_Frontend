@@ -8,10 +8,10 @@ import Popup from 'reactjs-popup';
 import HostForm from './components/HostForm';
 import axios from 'axios';
 import Alert from './components/Alert'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() 
 {
-
   const [hosts, setHosts] = useState([])
 
 
@@ -26,7 +26,7 @@ function App()
       {
         console.log(err);
       })
-  }, [hosts])
+  }, [])
 
 
   async function DeleteRequest(requestOptions)
@@ -38,6 +38,7 @@ function App()
         .then(response => response.text())
         .then(data =>
         {
+          console.log(data);
           return data
         })
     } catch (e)
@@ -57,19 +58,27 @@ function App()
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify
           ({
-            "IP": hostData.ip,
-            "username": hostData.hostName,
-            "connectionName": hostData.hostNickname,
+            "ip": hostData.ip,
+            "login": hostData.login,
+            "password": hostData.password,
+            "connectionName": hostData.connectionName,
           })
       }
 
+      let response
       await fetch(
         'http://localhost:3001/connections/insert', requestOptions)
         .then(response => response.text())
         .then(data =>
         {
-          return data
+          if (data === "Host inserted")
+            alert("Host added successfully")
+          else
+            alert("Error inserting host, plese verify that your new host data is unique.")
         })
+
+
+
     }
     catch (e)
     {
@@ -81,34 +90,26 @@ function App()
 
   const deleteHost = async (id) =>
   {
-    console.log(id);
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: id })
+      body: JSON.stringify({ "id": id })
     };
 
-    let response = await DeleteRequest(requestOptions)
+    let response
+    await fetch(
+      'http://localhost:3001/connections/delete', requestOptions)
+      .then(response => response.text())
+      .then(data =>
+      {
+        console.log(data);
+        response = data
+      })
 
-    console.log("before :" + response);
     if (response == "Host deleted")
     {
-      console.log("dzome");
-      <Popup trigger={response != null}
-        position="center center">
-        <Alert
-          cardBackgroundColor="white"
-          headerBackgroundColor="#4CAF50"
-          buttonBackgroundColor="#4CAF50"
-          headerTitleColor="white"
-          title="Success!"
-          message="Host added succesfully"
-          width="500px"
-          height="300px"
-        />
 
-      </Popup>
-      alert("Host deleted successfully");
+      alert("Host deleted successfully")
       setHosts(hosts.filter((host) =>
         host._id !== id
       ))
@@ -133,34 +134,32 @@ function App()
   }
 
   return (
-    <>
-      <Header />
-      <Hosts
-        hosts={hosts}
-        deleteHost={deleteHost}
-        editHost={editHost}
-        openHost={openHost}
-      />
-      <Popup trigger={<div className='addButton'>
-        <Fab
-          onClick={() =>
-          {
-          }}
-          size="large"
-        >
-          <AddIcon
-            fontSize="large"
-            color="black"
+      <>
+          <Header />
+          <Hosts
+            hosts={hosts}
+            deleteHost={deleteHost}
+            editHost={editHost}
+            openHost={openHost}
           />
-        </Fab>
-      </div>}
-        position="right center">
-        <HostForm
-          submit={handleFormSubmit} />
-      </Popup>
-
-
-    </>
+          <Popup trigger={<div className='addButton'>
+            <Fab
+              onClick={() =>
+              {
+              }}
+              size="large"
+            >
+              <AddIcon
+                fontSize="large"
+                color="black"
+              />
+            </Fab>
+          </div>}
+            position="right center">
+            <HostForm
+              submit={handleFormSubmit} />
+          </Popup>
+      </>
   );
 }
 

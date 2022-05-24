@@ -30,10 +30,21 @@
   background-color: #ffffff;
 }
 
+.cardTextContainer
+{
+  margin-top: 20px;
+}
+.cardIP
+{
+  color: white;
+}
+
 .cardTitle {
-  margin-left: 50px;
+  
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   height: fit-content;
+    font-weight: bold
+
 }
 

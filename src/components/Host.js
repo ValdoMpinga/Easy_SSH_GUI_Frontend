@@ -12,7 +12,11 @@ function Host({ host, deleteHost, editHost, openHost })
             onClick={openHost}
             className='card'>
             <div className='cardDecoration'></div>
-            <p className='cardTitle'>{host.connectionName}</p>
+            <div className='cardTextContainer'>
+                <p className='cardTitle'>{host.connectionName}</p>
+                <p className='cardIP'>{host.IP}</p>
+            </div>
+           
             {/* <FaEdit
                     className='editIcon'
                         fill='#FFD24C'
