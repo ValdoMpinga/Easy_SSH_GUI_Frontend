@@ -8,7 +8,8 @@ import Popup from 'reactjs-popup';
 import HostForm from './components/HostForm';
 import axios from 'axios';
 import Alert from './components/Alert'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import Home from './pages/Directory'
 
 function App() 
 {
@@ -29,25 +30,6 @@ function App()
   }, [])
 
 
-  async function DeleteRequest(requestOptions)
-  {
-    try
-    {
-      await fetch(
-        'http://localhost:3001/connections/delete', requestOptions)
-        .then(response => response.text())
-        .then(data =>
-        {
-          console.log(data);
-          return data
-        })
-    } catch (e)
-    {
-      console.log(e);
-    }
-  }
-
-
   const handleFormSubmit = async (e, hostData) =>
   {
     try
@@ -65,20 +47,23 @@ function App()
           })
       }
 
-      let response
       await fetch(
         'http://localhost:3001/connections/insert', requestOptions)
-        .then(response => response.text())
-        .then(data =>
+        .then(async (response) =>
         {
-          if (data === "Host inserted")
+          let v = await response.text()
+          console.log(v);
+        })
+        .then(async (data) =>
+        {
+          
+          if (data == "Host inserted")
             alert("Host added successfully")
           else
             alert("Error inserting host, plese verify that your new host data is unique.")
         })
 
-
-
+      return false
     }
     catch (e)
     {
@@ -134,32 +119,32 @@ function App()
   }
 
   return (
-      <>
-          <Header />
-          <Hosts
-            hosts={hosts}
-            deleteHost={deleteHost}
-            editHost={editHost}
-            openHost={openHost}
+    <>
+      <Header />
+      <Hosts
+        hosts={hosts}
+        deleteHost={deleteHost}
+        editHost={editHost}
+        openHost={openHost}
+      />
+      <Popup trigger={<div className='addButton'>
+        <Fab
+          onClick={() =>
+          {
+          }}
+          size="large"
+        >
+          <AddIcon
+            fontSize="large"
+            color="black"
           />
-          <Popup trigger={<div className='addButton'>
-            <Fab
-              onClick={() =>
-              {
-              }}
-              size="large"
-            >
-              <AddIcon
-                fontSize="large"
-                color="black"
-              />
-            </Fab>
-          </div>}
-            position="right center">
-            <HostForm
-              submit={handleFormSubmit} />
-          </Popup>
-      </>
+        </Fab>
+      </div>}
+        position="right center">
+        <HostForm
+          submit={handleFormSubmit} />
+      </Popup>
+    </>
   );
 }
 

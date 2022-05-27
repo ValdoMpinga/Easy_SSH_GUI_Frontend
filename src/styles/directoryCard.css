@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.pageTitle {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.directoryContainer {
+  width: 600px;
+  height: 100px;
+    margin: 0 auto;
+    margin-top: 30px;
+
+  background-color: #92b4ec;
+  border-radius: 30px;
+}
+
+.directoryContainer:hover {
+  background-color: #ffd24c;
+}
+
+.cardTitle {
+  display: flex;
+  justify-content: center;
+}
+
+.iconButtonsContainer {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  bottom: 0;
+}

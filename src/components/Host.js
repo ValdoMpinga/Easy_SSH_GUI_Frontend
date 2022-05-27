@@ -14,17 +14,8 @@ function Host({ host, deleteHost, editHost, openHost })
             <div className='cardDecoration'></div>
             <div className='cardTextContainer'>
                 <p className='cardTitle'>{host.connectionName}</p>
-                <p className='cardIP'>{host.IP}</p>
+                <p className='cardIP'>{host.ip}</p>
             </div>
-           
-            {/* <FaEdit
-                    className='editIcon'
-                        fill='#FFD24C'
-                        size={30} />
-                    <AiFillDelete
-                        className='deleteIcon'
-                        fill='#FFD24C'
-                        size={30} /> */}
             <div>
                 <IconButton
                     onClick={(e) =>
