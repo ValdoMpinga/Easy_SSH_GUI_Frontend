@@ -32,11 +32,10 @@
 
 .cardTextContainer
 {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   margin-top: 20px;
-}
-.cardIP
-{
-  color: white;
+  justify-content: flex-start;
 }
 
 .cardTitle {
@@ -44,7 +43,15 @@
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   height: fit-content;
-    font-weight: bold
+  font-weight: bold
 
 }
+
+.cardIP
+{
+  color: white;
+  
+}
+
+
 

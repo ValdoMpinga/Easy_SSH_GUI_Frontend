@@ -4,22 +4,23 @@ import Button from 'react-bootstrap/Button'
 import '../styles/hostForm.css'
 import { SentimentDissatisfied } from '@mui/icons-material'
 
-function HostForm({ submit })
+function HostForm({ submit, formTitle, formContent })
 {
-    const [ip, setIp] = useState('')
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
-    const [connectionName, setConnectionName] = useState('')
+    const [ip, setIp] = useState(formContent.ip)
+    const [login, setLogin] = useState(formContent.login)
+    const [password, setPassword] = useState(formContent.password)
+    const [connectionName, setConnectionName] = useState(formContent.connectionName)
 
     return (
         <div className='hostFormContainer'
         >
-            <div><h2 className="formTitle">Add a Host</h2></div>
+            <div><h2 className="formTitle">{formTitle}</h2></div>
 
             <div className='formSubContainer'>
                 <form onSubmit={async (e) =>
                 {
-                    let hostData =
+                   
+                    let hostFormData =
                     {
                         ip: ip,
                         login: login,
@@ -27,8 +28,8 @@ function HostForm({ submit })
                         connectionName: connectionName,
                     }
 
-                    await submit(e, hostData)
-                    return false
+                    await submit(e, hostFormData)
+                   
                 }}
                     
                 >

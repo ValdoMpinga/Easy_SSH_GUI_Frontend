@@ -21,7 +21,7 @@ function Host({ host, deleteHost, editHost, openHost })
                     onClick={(e) =>
                     {
                         e.stopPropagation()
-                        editHost()
+                        editHost(host)
                     }}
                     color="primary"
                     aria-label="upload picture"
