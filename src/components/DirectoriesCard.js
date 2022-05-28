@@ -2,14 +2,15 @@ import React from 'react'
 import DirectoryCard from './DirectoryCard'
 const uuid = require('uuid');
 
-var dirs = ['a', 'b', 'c']
-function DirectoriesCard()
+function DirectoriesCard({ directories })
 {
     return (
         <>
-            {dirs.map(dir =>
+            {directories.map(dir =>
+               
             (
                 <DirectoryCard
+                    key={uuid.v4()}
                     title={dir}
                 />
             ))}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import './App.css';
 import Hosts from './components/Hosts';
 import Header from './components/Header';
@@ -8,6 +8,7 @@ import Popup from 'reactjs-popup';
 import HostForm from './components/HostForm';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function App() 
 {
@@ -21,6 +22,7 @@ function App()
       connectionName: ''
     })
   const [selectedHostId, setSelectedHostId] = useState()
+  const navigate = useNavigate();
 
   useEffect(() =>
   {
@@ -28,13 +30,12 @@ function App()
       .then(res =>
       {
         setHosts(res.data)
-        console.log(res.data);
       })
       .catch(err =>
       {
         console.log(err);
       })
-  }, [formTitle])
+  }, [])
 
 
   const handleFormSubmit = async (e, hostFormData) =>
@@ -137,46 +138,47 @@ function App()
         console.log(data);
       }
     }
-
-
-
   }
 
   const editHost = async (host) =>
   {
     setFormTitle("Update a Host")
     setSelectedHostId(host._id)
-    setFormContent({
-      ip: host.ip,
-      login: host.login,
-      password: host.password,
-      connectionName: host.connectionName
-    })
+
+    setFormContent
+      ({
+        ip: host.ip,
+        login: host.login,
+        password: host.password,
+        connectionName: host.connectionName
+      })
     document.getElementById('formButton').click()
-    // const requestOptions = {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(host)
-    // };
-    // console.log(JSON.stringify(host));
-
-
-    // if (data == "Host updated")
-    // {
-    //   alert("Host added successfully")
-    //   window.location.reload()
-    // }
-    // else
-    //   alert("Error inserting host, plese verify that your new host data is unique.")
-
-
-    // let response = await fetch('http://localhost:3001/connections/update', requestOptions)
-    // let data = await response.text()
   }
 
-  const openHost = (id) =>
+  const openHost = async (host) =>
   {
-    console.log('open');
+    const requestOptions =
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify
+        ({
+          "ip": host.ip,
+          "login": host.login,
+          "password": host.password,
+        })
+    }
+
+
+    let response = await fetch('http://localhost:3001/directories/get', requestOptions)
+    let data = await response.text()
+    let dataArray = data.split(',')
+    console.log(Array.isArray(dataArray));
+    navigate
+      (
+        "/directories",
+        { state: dataArray }
+      )
   }
 
   return (

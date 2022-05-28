@@ -9,7 +9,11 @@ function Host({ host, deleteHost, editHost, openHost })
     return (
         <div
             key={host._id}
-            onClick={openHost}
+            onClick={(e) =>
+            {
+                e.stopPropagation()
+                openHost(host)
+            }}
             className='card'>
             <div className='cardDecoration'></div>
             <div className='cardTextContainer'>
