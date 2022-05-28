@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.pageTitle {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.cardDecoration {
+  height: 100px;
+  width: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color: #ffffff;
+}
+
+.directoryContainer {
+ background-color: #92b4ec;
+  border-radius: 10px;
+  width: 600px;
+  height: 100px;
+  display: grid;
+  grid-template-columns: 10% 70% 10% 10%;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.directoryContainer:hover {
+  background-color: #ffd24c;
+}
+
+.cardTitle {
+  display: flex;
+  justify-content: center;
+}
+
+.iconButtonsContainer {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  bottom: 0;
+}
+
+.addButton
+{
+  position: fixed;
+  bottom:0;
+  right: 50px;
+  margin-bottom: 20px;
+}

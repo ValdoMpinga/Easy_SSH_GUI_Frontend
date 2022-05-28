@@ -1,8 +1,8 @@
 import React from 'react'
-import DirectoryCard from './DirectoryCard'
+import DirectoryCard from './Directory'
 const uuid = require('uuid');
 
-function DirectoriesCard({ directories })
+function DirectoriesCard({ directories, deleteDirectory })
 {
     return (
         <>
@@ -11,7 +11,8 @@ function DirectoriesCard({ directories })
             (
                 <DirectoryCard
                     key={uuid.v4()}
-                    title={dir}
+                    directoryName={dir}
+                    deleteDirectory={deleteDirectory}
                 />
             ))}
         </>

@@ -16,10 +16,12 @@ function Host({ host, deleteHost, editHost, openHost })
             }}
             className='card'>
             <div className='cardDecoration'></div>
+
             <div className='cardTextContainer'>
                 <p className='cardTitle'>{host.connectionName}</p>
                 <p className='cardIP'>{host.ip}</p>
             </div>
+
             <div>
                 <IconButton
                     onClick={(e) =>
@@ -33,6 +35,7 @@ function Host({ host, deleteHost, editHost, openHost })
                     <EditIcon />
                 </IconButton>
             </div>
+            
             <IconButton
                 onClick={(e) =>
                 {

@@ -1,33 +1,46 @@
 import React from 'react'
-import '../styles/directoryCard.css'
+import '../styles/directory.css'
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 const uuid = require('uuid');
 
-function DirectoryCard({ title, kety })
+function DirectoryCard({ directoryName, deleteDirectory })
 {
   return (
     <div
       className="directoryContainer"
-      >
-      <h3 className="cardTitle">{title}</h3>
-      <div className='iconButtonsContainer'>
+      onClick={() =>
+      {
+        console.log(directoryName);
+      }
+      }
+    >
+      <div className='cardDecoration'></div>
+
+      <div>
+        <h3 className="carddirectoryName">{directoryName}</h3>
+      </div>
+
+      <div>
         <IconButton
           onClick={(e) =>
           {
             e.stopPropagation()
+
           }}
           color="primary"
           aria-label="upload picture"
           component="span">
           <EditIcon />
         </IconButton>
-
+      </div>
+      <div>
         <IconButton
           onClick={(e) =>
           {
             e.stopPropagation()
+            deleteDirectory(directoryName)
           }}
           color="primary"
           aria-label="upload picture"

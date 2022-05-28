@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState, useEffect, CSSProperties } from 'react';
 import './App.css';
 import Hosts from './components/Hosts';
 import Header from './components/Header';
@@ -9,6 +9,7 @@ import HostForm from './components/HostForm';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import MoonLoader from "react-spinners/MoonLoader";
 
 function App() 
 {
@@ -21,7 +22,16 @@ function App()
       password: '',
       connectionName: ''
     })
+
+  const css = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
+
   const [selectedHostId, setSelectedHostId] = useState()
+  const [loading, setLoading] = useState(false);
+  const [color, setColor] = useState("#4CAF50");
   const navigate = useNavigate();
 
   useEffect(() =>
@@ -157,6 +167,7 @@ function App()
 
   const openHost = async (host) =>
   {
+    setLoading(true)
     const requestOptions =
     {
       method: 'POST',
@@ -172,13 +183,19 @@ function App()
 
     let response = await fetch('http://localhost:3001/directories/get', requestOptions)
     let data = await response.text()
-    let dataArray = data.split(',')
-    console.log(Array.isArray(dataArray));
+    let directoriesArray = data.split(',')
     navigate
       (
         "/directories",
-        { state: dataArray }
+        {
+          state:
+          {
+            directoriesArray,
+            host
+          }
+        }
       )
+    setLoading(false)
   }
 
   return (
@@ -190,6 +207,14 @@ function App()
         editHost={editHost}
         openHost={openHost}
       />
+
+      <MoonLoader
+        color={color}
+        loading={loading}
+        css={css}
+        speedMultiplier={0.5}
+        size={100} />
+      
       <Popup trigger={<div className='addButton'>
         <Fab
           id="formButton"
@@ -223,6 +248,7 @@ function App()
           formContent={formContent}
           submit={handleFormSubmit} />
       </Popup>
+
     </>
   );
 }
