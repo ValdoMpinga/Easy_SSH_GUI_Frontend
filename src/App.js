@@ -183,19 +183,36 @@ function App()
 
     let response = await fetch('http://localhost:3001/directories/get', requestOptions)
     let data = await response.text()
-    let directoriesArray = data.split(',')
-    navigate
-      (
-        "/directories",
-        {
-          state:
+    if (data == "Error finding directories")
+    {
+      alert('Please make sure that the host machine is turned on')
+      setLoading(false)
+    } else
+    {
+
+
+      let directoriesArray = data.split(',')
+      let filteredDirectoriesArray = []
+
+      directoriesArray.forEach(dir =>
+      {
+        if (dir != "")
+          filteredDirectoriesArray.push(dir)
+      });
+
+      navigate
+        (
+          "/directories",
           {
-            directoriesArray,
-            host
+            state:
+            {
+              directoriesArray,
+              host
+            }
           }
-        }
-      )
-    setLoading(false)
+        )
+      setLoading(false)
+    }
   }
 
   return (
@@ -214,7 +231,7 @@ function App()
         css={css}
         speedMultiplier={0.5}
         size={100} />
-      
+
       <Popup trigger={<div className='addButton'>
         <Fab
           id="formButton"

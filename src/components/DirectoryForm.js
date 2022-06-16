@@ -1,9 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import '../styles/directoryForm.css'
 
-function DirectoryForm({ formTitle, submit})
+function DirectoryForm({ formContent, formTitle, submit })
 {
-    const [directoryName, setDirectoryName] = useState('')
+    const [directoryName, setDirectoryName] = useState(formContent.directoryName)
+    const [oldDirectoryName, setoldDirectoryName] = useState()
+
+    useEffect(()=>
+    {
+        setoldDirectoryName(directoryName)
+    },[])
+
 
     return (
         <div className='directoryFormContainer'>
@@ -11,7 +18,7 @@ function DirectoryForm({ formTitle, submit})
             <form onSubmit={async (e) => 
             {
                 console.log(directoryName);
-                submit(e,directoryName)
+                submit(e, directoryName, oldDirectoryName)
             }}>
 
 

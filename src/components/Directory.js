@@ -5,14 +5,15 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 const uuid = require('uuid');
 
-function DirectoryCard({ directoryName, deleteDirectory })
+function DirectoryCard({ directoryName, deleteDirectory, editDirectory, openDirectory })
 {
   return (
     <div
       className="directoryContainer"
       onClick={() =>
       {
-        console.log(directoryName);
+        openDirectory(directoryName)
+        
       }
       }
     >
@@ -27,7 +28,7 @@ function DirectoryCard({ directoryName, deleteDirectory })
           onClick={(e) =>
           {
             e.stopPropagation()
-
+            editDirectory(directoryName)
           }}
           color="primary"
           aria-label="upload picture"
